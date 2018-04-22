@@ -3,10 +3,10 @@ import java.util.*;
 import javax.lang.model.util.ElementScanner6;
 
 public class Scheduler extends Thread {
-	private Vector queue; 	// first priority
-	private Vector queue1; 	// second priority
-	private Vector queue2; 	// third priority
-	private int timeSlice; 	// time slice for queue
+	private Vector queue; // first priority
+	private Vector queue1; // second priority
+	private Vector queue2; // third priority
+	private int timeSlice; // time slice for queue
 	private int timeSlice1; // time slice for queue 1
 	private int timeSlice2; // time slice for queue 2
 	private static final int DEFAULT_TIME_SLICE = 1000;
@@ -93,8 +93,8 @@ public class Scheduler extends Thread {
 
 	// default constructor
 	public Scheduler() {
-		timeSlice = DEFAULT_TIME_SLICE / 2;  // for queue 0
-		timeSlice1 = DEFAULT_TIME_SLICE; 	 // for queue 1
+		timeSlice = DEFAULT_TIME_SLICE / 2; // for queue 0
+		timeSlice1 = DEFAULT_TIME_SLICE; // for queue 1
 		timeSlice2 = DEFAULT_TIME_SLICE * 2; // for queue 2
 		queue = new Vector();
 		queue1 = new Vector();
@@ -104,9 +104,9 @@ public class Scheduler extends Thread {
 
 	// constructor with quantum time specified
 	public Scheduler(int quantum) {
-		timeSlice = quantum / 2; 			 // for queue 0
-		timeSlice1 = quantum; 				 // for queue 1
-		timeSlice2 = quantum * 2; 			 // for queue 2
+		timeSlice = quantum / 2; // for queue 0
+		timeSlice1 = quantum; // for queue 1
+		timeSlice2 = quantum * 2; // for queue 2
 		queue = new Vector();
 		queue1 = new Vector();
 		queue2 = new Vector();
@@ -116,9 +116,9 @@ public class Scheduler extends Thread {
 	// A new feature added to p161 
 	// A constructor to receive the max number of threads to be spawned
 	public Scheduler(int quantum, int maxThreads) {
-		timeSlice = quantum / 2; 			 // for queue 0
-		timeSlice1 = quantum; 				 // for queue 1
-		timeSlice2 = quantum * 2; 			 // for queue 2
+		timeSlice = quantum / 2; // for queue 0
+		timeSlice1 = quantum; // for queue 1
+		timeSlice2 = quantum * 2; // for queue 2
 		queue = new Vector();
 		queue1 = new Vector();
 		queue2 = new Vector();
@@ -237,7 +237,7 @@ public class Scheduler extends Thread {
 			if (!queue.isEmpty()) {
 				current.suspend();
 				processQ0(current); // go back and process queue 0
-				current.resume(); // resume after Q0 is done
+				current.resume();
 			}
 			// sleep for the rest of this queue1 quantum time
 			schedulerSleep(timeSlice1 - timeSlice);
@@ -288,7 +288,8 @@ public class Scheduler extends Thread {
 					current.suspend();
 					processQ0(current);
 					processQ1(current);
-					current.resume(); // resume after Q0 and Q1 is done
+					current.resume();
+
 				}
 			}
 			// sleep for the rest of this queue quantum time
